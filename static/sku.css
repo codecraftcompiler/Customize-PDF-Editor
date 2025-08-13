@@ -1,0 +1,67 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+  padding-top: 5px;
+  background-color:  #e1ebf5;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+.heading{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.text{
+  padding-left: 615px;
+}
+
+.link{
+  display: flex;
+  align-items: center;
+}
+
+.link a{
+  font-size: 20px;
+}
+
+.main {
+  display: flex;
+  gap: 15rem;
+  flex-direction: row;
+}
+
+select,
+input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.sku-box {
+  margin-bottom: 10px;
+}
+
+.right_sec{
+  display: flex;
+  gap: 35px; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.left_sec{
+  display: flex;
+  gap: 35px; 
+  justify-content: space-between; 
+  align-items: center;
+}

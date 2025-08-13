@@ -1,0 +1,86 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ELEM PDF Editor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>PDF Tools</h2>
+    <ul>
+      <li>All Tools Such as:</li>
+      <li>Edit PDF</li>
+      <li>Merge PDF</li>
+      <li>Rotate PDF</li>
+      <li>Sorting</li>
+      <li>
+        <button class="special"><a href="{{ url_for('sku')}}">Edit Sku's</a></button>
+      </li>
+      <li>
+        <select id="fileSelector">
+          <option disabled selected>Select a PDF to preview</option>
+        </select>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="main">
+    <h1>PDF Editor</h1>
+
+
+
+    <form id="upload-form" action="/process" method="post" enctype="multipart/form-data">
+
+       <!-- User-facing file input -->
+      <input type="file" id="fileInput" accept="application/pdf" multiple>
+
+      <!-- Hidden input that will be submitted -->
+      <input type="file" name="file" id="fileHidden" accept="application/pdf" multiple hidden required>
+
+      <select name="operation">
+        <option value="merge">Merge PDF</option>
+        <option value="compress">Compress PDF</option>
+        <option value="rotate90">Rotate PDF(90*)</option>
+        <option value="rotate180">Rotate PDF(180*)</option>
+        <option value="rotate270">Rotate PDF(270*)</option>
+        <option value="crop">Crop</option>
+        <option value="sortflipcart">Sorting Flipcart</option>
+        <option value="sortamazon">Sorting Amazon</option>
+        <option value="crop_merge">Crop & Merge</option>
+        <option value="allfunction">Flipcart's function</option>
+      </select>
+      <button type="submit">Apply Tool</button>
+    </form>
+    
+    <h4>Selected Files</h4>
+    <ul id="selectedFilesList" style=" display: flex; flex-wrap: wrap; gap: 15px; font-size: small; padding-left: 15px;"></ul>
+    <hr>
+    
+
+    <div class="tools-grid">
+      <button onclick="selectTool('merge')">Merge PDF</button>
+      <button onclick="selectTool('compress')">Compress PDF</button>
+      <button onclick="selectTool('rotate90')">Rotate PDF(90*)</button>
+      <button onclick="selectTool('rotate180')">Rotate PDF(180*)</button>
+      <button onclick="selectTool('rotate270')">Rotate PDF(270*)</button>
+      <button onclick="selectTool('crop')">Crop</button>
+      <button onclick="selectTool('sortflipcart')">Sorting Flipcart</button>
+      <button onclick="selectTool('sortamazon')">Sorting Amazon</button>
+      <button onclick="selectTool('crop_merge')">Crop & Merge</button>
+      <button onclick="selectTool('allfunction')">Flipcart's function</button>
+    </div>
+
+    <hr>
+
+
+    <div id="previewContainer" style="display: flex; flex-direction: column; gap: 10px;"></div>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

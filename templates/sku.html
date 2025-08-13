@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKU Selector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='sku.css') }}">
+</head>
+
+<body>
+  <div class="heading">
+    <div class="text">
+      <h1>SKU Editing</h1>
+    </div>
+    <div class="link">
+      <a href="{{ url_for('home')}}">Back</a>
+    </div>
+  </div>
+
+
+  <form method="POST" action="/upload_sku_excel" enctype="multipart/form-data">
+    <label><b>Upload Excel (Flipkart or Amazon):</b></label><br>
+    <input type="file" name="sku_file" accept=".xlsx,.csv" required>
+    <select name="platform" required>
+      <option value="flipkart">Flipkart</option>
+      <option value="amazon">Amazon</option>
+    </select>
+    <button type="submit">Upload</button>
+  </form>
+
+  <hr>
+
+  <div class="main">
+
+    <div class="left">
+      <h2>Flipkart SKUs</h2>
+
+
+      <div class="left_sec">
+        <form method="POST" action="/add_sku">
+          <input type="text" name="sku" placeholder="Enter Flipkart SKU" required>
+          <input type="hidden" name="platform" value="flipkart">
+          <button type="submit">Add</button>
+        </form>
+        <form method="POST" action="/delete_all_skus"
+          onsubmit="return confirm('Are you sure you want to delete all Flipkart SKUs?');">
+          <input type="hidden" name="platform" value="flipkart">
+          <button type="submit" class="delete-btn" style="margin-top: 10px;">Delete All Flipkart SKUs</button>
+        </form>
+      </div>
+      <ul>
+        {% for sku in flipkart_skus %}
+        <li class="sku-box">
+          {{ sku }}
+          <form method="POST" action="/delete_sku" style="display:inline;">
+            <input type="hidden" name="sku" value="{{ sku }}">
+            <input type="hidden" name="platform" value="flipkart">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+
+
+    </div>
+    <div class="right">
+
+      <!-- Amazon Section -->
+      <h2>Amazon SKUs</h2>
+      <div class="right_sec">
+        <form method="POST" action="/add_sku">
+          <input type="text" name="sku" placeholder="Enter Amazon SKU" required>
+          <input type="hidden" name="platform" value="amazon">
+          <button type="submit">Add</button>
+        </form>
+        <form method="POST" action="/delete_all_skus"
+          onsubmit="return confirm('Are you sure you want to delete all Amazon SKUs?');">
+          <input type="hidden" name="platform" value="amazon">
+          <button type="submit" class="delete-btn" style="margin-top: 10px;">Delete All Amazon SKUs</button>
+        </form>
+      </div>
+
+      <ul>
+        {% for sku in amazon_skus %}
+        <li class="sku-box">
+          {{ sku }}
+          <form method="POST" action="/delete_sku" style="display:inline;">
+            <input type="hidden" name="sku" value="{{ sku }}">
+            <input type="hidden" name="platform" value="amazon">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+
+
+    </div>
+  </div>
+
+</body>
+
+</html>
